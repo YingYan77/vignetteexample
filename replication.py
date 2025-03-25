@@ -10,14 +10,14 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 from statsmodels.formula.api import ols
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
+import os
 
-data_path = '/Users/ying/Desktop/HSG/Research Assistant/Experiments with ChatGPT/Jurado (2022)/supplementary material-replicate codes/'
-data_file = 'sj-dta-2-eup-10.1177_14651165221107100.dta'
+data_path = os.getcwd() 
+data_file = '/supplementary material-replicate codes/sj-dta-2-eup-10.1177_14651165221107100.dta'
 
-psuedo_data_path = '/Users/ying/Desktop/HSG/Research Assistant/Experiments with ChatGPT/Jurado (2022)/'
-spain = 'data_spain.csv'
-germany = 'data_germany.csv'
+spain = '/data_spain.csv'
+germany = '/data_germany.csv'
 
 
 # two attitudes variables: satdemo and european_citizen
@@ -119,7 +119,7 @@ def plot_ate(model1, model2, axis, label):
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['left'].set_visible(False)
-    plt.savefig(psuedo_data_path + 'plots/' + label + '.png', bbox_inches='tight')
+    plt.savefig(data_path + '/plots/' + label + '.png', bbox_inches='tight')
     return plt.show()
 
 def both_model(data, y): 
@@ -137,7 +137,7 @@ df = clean_juardo_data(data_path + data_file)
 df.isnull().sum() # opinioneu, satdemo and european_citizen have missing values
 
 
-psuedo_df = read_psuedo_data(psuedo_data_path, spain, germany)
+psuedo_df = read_psuedo_data(data_path, spain, germany)
 
 # balance check on six variables: female, age, education, employmentstatus, satdemo and european_citizen  
 covariates = ['female', 'age', 'education', 'employmentstatus', 'satdemo', 'european_citizen']
